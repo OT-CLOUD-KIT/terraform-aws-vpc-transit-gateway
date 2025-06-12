@@ -9,7 +9,7 @@ This module creates a Transit Gateway (TGW) and allows you to attach multiple VP
 
 | Name                                              | Version  |
 |---------------------------------------------------|----------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.82.2   |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12.1 |
 
 ## Usage 
 
