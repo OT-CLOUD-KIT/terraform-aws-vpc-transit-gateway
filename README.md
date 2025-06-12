@@ -34,5 +34,50 @@ module "transit_gateway" {
 }
 ```
 
+## Resources
+
+| Name                                                  | Type      |
+|-------------------------------------------------------|-----------|
+| `aws_ec2_transit_gateway`                             | Resource  |
+| `aws_ec2_transit_gateway_vpc_attachment`              | Resource  |
+| `aws_ec2_transit_gateway_route`                       | Resource  |
+| `aws_ec2_transit_gateway_route_table`                 | Resource  |
+| `aws_ec2_transit_gateway_route_table_association`     | Resource  |
+| `aws_ec2_transit_gateway_route_table_propagation`     | Resource  |
+
+---
+
+## Inputs
+
+| Name                              | Description                                           | Type             | Default     | Required |
+|-----------------------------------|-------------------------------------------------------|------------------|-------------|----------|
+| `transit_gateway_name`            | Name tag for the Transit Gateway                     | `string`         | `"tgw"`     | yes      |
+| `description`                     | Description of the TGW                               | `string`         | `""`        | no       |
+| `amazon_side_asn`                | ASN for Amazon side of the TGW                       | `number`         | `64512`     | yes      |
+| `auto_accept_shared_attachments` | Auto-accept cross-account attachments                | `string`         | `"disable"` | no       |
+| `default_route_table_association`| Enable default route table association               | `string`         | `"enable"`  | no       |
+| `default_route_table_propagation`| Enable default route table propagation               | `string`         | `"enable"`  | no       |
+| `dns_support`                    | Enable DNS support for TGW                           | `string`         | `"enable"`  | no       |
+| `multicast_support`              | Enable multicast support                             | `string`         | `"disable"` | no       |
+| `vpn_ecmp_support`               | Enable ECMP for VPN                                  | `string`         | `"enable"`  | no       |
+| `security_group_referencing_support` | Enable SG referencing across VPCs               | `string`         | `"disable"` | no       |
+| `transit_gateway_cidr_blocks`    | List of CIDR blocks for the TGW                      | `list(string)`   | `[]`        | no       |
+| `tgw_route_cidr_block`           | CIDR to add route to in each VPC                     | `string`         | `""`        | yes      |
+| `tags`                           | Tags to apply to TGW and attachments                 | `map(string)`    | `{}`        | no       |
+| `vpc_attachments`                | VPCs to attach with options                          | `list(object)`   | `[]`        | yes      |
 
 
+## Outputs
+
+| Name                  | Description                                              |
+|-----------------------|----------------------------------------------------------|
+| `transit_gateway_id`  | The ID of the created Transit Gateway                    |
+| `vpc_attachment_ids`  | A map of VPC attachment names to their TGW attachment IDs |
+
+---
+
+## Considerations
+
+- Ensure VPCs, subnets, and route tables exist **before applying** this module.
+- Validate that **subnet IDs are correct** and belong to the specified VPC.
+- This module supports **advanced routing** using TGW route table associations and propagations.
