@@ -3,13 +3,17 @@
 This module creates a Transit Gateway (TGW) and allows you to attach multiple VPCs with customizable route propagation and association settings.
 
 ## Architecture
-![image](https://github.com/user-attachments/assets/528b2538-7f71-4fa9-b54e-a280729d4435)
+![transit_gateway drawio](https://github.com/user-attachments/assets/3be7cced-36ef-4267-9498-0f3cd5797f63)<?xml version="1.0" encoding="UTF-8"?>
+
+> **Note:**  
+> The above infrastructure diagram illustrates a same-region VPC Transit Gateway setup. However, this module also supports creating Transit Gateway connections across multiple regions and even across different AWS accounts.
 
 ## Providers
 
 | Name                                              | Version  |
 |---------------------------------------------------|----------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.12.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.82.2   |
 
 ## Usage 
 
@@ -33,6 +37,10 @@ module "transit_gateway" {
   transit_gateway_name               = var.transit_gateway_name
 }
 ```
+
+> **Note:**  
+> The above example demonstrates how to use the module. All variables, resources, and outputs used here are already defined within this module.
+
 
 ## Resources
 
@@ -81,3 +89,8 @@ module "transit_gateway" {
 - Ensure VPCs, subnets, and route tables exist **before applying** this module.
 - Validate that **subnet IDs are correct** and belong to the specified VPC.
 - This module supports **advanced routing** using TGW route table associations and propagations.
+
+## Contributors
+  
+ - Piyush Upadhyay
+ - Nikita Joshi
