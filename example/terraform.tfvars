@@ -16,7 +16,9 @@ tags = {
   Owner       = "Nikita"
 }
 
-tgw_route_cidr_block = "10.0.0.0/8"
+tgw_route_cidr_block = "10.0.0.0/8" # Global CIDR block for routing entries
+
+  # -------- Attachment 1: VPC-A Details--------
 
 vpc_attachments = [
   {
@@ -29,6 +31,8 @@ vpc_attachments = [
     associate_with_tgw_route_table = true
     propagate_to_tgw_route_table   = true
   },
+    # -------- Attachment 2: VPC-B Details --------
+
   {
     name                           = "tgw-attachment-vpcB"
     vpc_id                         = "vpc-0cda6bcbeb0cc309b"
