@@ -19,21 +19,59 @@ This module creates a Transit Gateway (TGW) and allows you to attach multiple VP
 module "transit_gateway" {
   source = "../"
 
-  description                        = var.description
-  amazon_side_asn                    = var.amazon_side_asn
-  auto_accept_shared_attachments     = var.auto_accept_shared_attachments
-  default_route_table_association    = var.default_route_table_association
-  default_route_table_propagation    = var.default_route_table_propagation
-  dns_support                        = var.dns_support
-  multicast_support                  = var.multicast_support
-  vpn_ecmp_support                   = var.vpn_ecmp_support
-  security_group_referencing_support = var.security_group_referencing_support
-  transit_gateway_cidr_blocks        = var.transit_gateway_cidr_blocks
-  vpc_attachments                    = var.vpc_attachments
-  tgw_route_cidr_block               = var.tgw_route_cidr_block
-  tags                               = var.tags
-  transit_gateway_name               = var.transit_gateway_name
+  description                        = "Transit Gateway for multi-VPC setup"
+  amazon_side_asn                    = 64512
+  auto_accept_shared_attachments     = "enable"
+  default_route_table_association    = "enable"
+  default_route_table_propagation    = "enable"
+  dns_support                        = "enable"
+  multicast_support                  = "disable"
+  vpn_ecmp_support                   = "enable"
+  security_group_referencing_support = "disable"
+  transit_gateway_cidr_blocks        = ["172.31.0.0/16"]
+
+  vpc_attachments = {
+    "vpc-a" = {
+      vpc_id                             = "vpc-0123456789abcdef0"
+      subnet_ids                         = ["subnet-03b56832hg", "subnet-5h6790bg"]
+      dns_support                        = true
+      ipv6_support                       = false
+      appliance_mode_support             = false
+      security_group_referencing_support = false
+      default_association                = true
+      default_propagation                = true
+    }
+    "vpc-b" = {
+      vpc_id                             = "vpc-0abcdef1234567890"
+      subnet_ids                         = ["subnet-bbb111", "subnet-bbb222"]
+      dns_support                        = true
+      ipv6_support                       = false
+      appliance_mode_support             = false
+      security_group_referencing_support = false
+      default_association                = true
+      default_propagation                = true
+    }
+  }
+
+  tgw_route_cidr_block = {
+    "vpc-a" = {
+      cidr           = "10.0.0.0/16"
+      attachment_key = "vpc-a"
+    }
+    "vpc-b" = {
+      cidr           = "10.1.0.0/16"
+      attachment_key = "vpc-b"
+    }
+  }
+
+  tags = {
+    Environment = "dev"
+    Owner       = "team-x"
+  }
+
+  transit_gateway_name = "tgw"
 }
+
 ```
 
 > **Note:**  
