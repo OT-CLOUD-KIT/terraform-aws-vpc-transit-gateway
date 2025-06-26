@@ -12,10 +12,10 @@ resource "aws_ec2_transit_gateway" "this" {
   transit_gateway_cidr_blocks         = var.transit_gateway_cidr_blocks
 
   tags = merge(
-    var.tags,
     {
-      Name = var.transit_gateway_name
-    }
+      Name = "${local.base_name}-tgw"
+    },
+    local.common_tags
   )
 }
 
@@ -31,9 +31,13 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
   transit_gateway_default_route_table_association = each.value.associate_with_tgw_route_table
   transit_gateway_default_route_table_propagation = each.value.propagate_to_tgw_route_table
 
-  tags = merge(var.tags, {
-    Name = each.value.name
-  })
+    tags = merge(
+    {
+      Name = "${local.base_name}-${each.value.name}-tgw-attach"
+    },
+    local.common_tags
+  )
+
 }
 
 resource "aws_route" "tgw_routes" {

@@ -17,9 +17,8 @@ This module creates a Transit Gateway (TGW) and allows you to attach multiple VP
 
  ```hcl
 module "transit_gateway" {
-  source = "../"
+  source = "OT-CLOUD-KIT/terraform-aws-rds-postgres"
 
-  description                        = "Transit Gateway for multi-VPC setup"
   amazon_side_asn                    = 64512
   auto_accept_shared_attachments     = "enable"
   default_route_table_association    = "enable"
@@ -33,7 +32,7 @@ module "transit_gateway" {
   vpc_attachments = {
     "vpc-a" = {
       vpc_id                             = "vpc-0123456789abcdef0"
-      subnet_ids                         = ["subnet-03b56832hg", "subnet-5h6790bg"]
+      subnet_ids                         = ["subnet-03b5635832hg", "subnet-5h673490bg"]
       dns_support                        = true
       ipv6_support                       = false
       appliance_mode_support             = false
@@ -43,7 +42,7 @@ module "transit_gateway" {
     }
     "vpc-b" = {
       vpc_id                             = "vpc-0abcdef1234567890"
-      subnet_ids                         = ["subnet-bbb111", "subnet-bbb222"]
+      subnet_ids                         = ["subnet-bbb11146fga1", "subnet-bbbaQFG222"]
       dns_support                        = true
       ipv6_support                       = false
       appliance_mode_support             = false

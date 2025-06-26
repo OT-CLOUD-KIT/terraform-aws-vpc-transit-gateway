@@ -9,12 +9,7 @@ vpn_ecmp_support                   = "enable"
 security_group_referencing_support = "disable"
 transit_gateway_cidr_blocks        = ["10.200.0.0/16"]
 transit_gateway_name               = "prod-tgw"
-
-
-tags = {
-  Environment = "prod"
-  Owner       = "Nikita"
-}
+region  = "us-east-1"
 
 tgw_route_cidr_block = "10.0.0.0/8" # Global CIDR block for routing entries
 
@@ -44,3 +39,21 @@ vpc_attachments = [
     propagate_to_tgw_route_table   = true
   }
 ]
+
+################# Naming Convension #####################
+
+random_alphanumeric_len = 4
+
+bu       = "ot"
+app      = "bp"
+env      = "d"
+resource = "database"
+
+special = false
+upper   = false
+number  = true
+
+gen_no_of_names = 1
+
+team    = "infra"
+program = "ot"
