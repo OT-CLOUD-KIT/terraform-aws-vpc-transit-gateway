@@ -17,7 +17,7 @@ This module creates a Transit Gateway (TGW) and allows you to attach multiple VP
 
  ```hcl
 module "transit_gateway" {
-  source = "OT-CLOUD-KIT/terraform-aws-rds-postgres"
+  source = "OT-CLOUD-KIT/terraform-aws-vpc-transit-gateway"
 
   amazon_side_asn                    = 64512
   auto_accept_shared_attachments     = "enable"

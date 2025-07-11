@@ -18,7 +18,7 @@ module "standard_tags" {
   env     = var.env
 }
 module "transit_gateway" {
-  source = "git@github.com:OT-CLOUD-KIT/terraform-aws-rds-postgres.git?ref=feature"
+  source = "git@github.com:OT-CLOUD-KIT/terraform-aws-vpc-transit-gateway.git?ref=Feature"
 
   description                        = var.description
   amazon_side_asn                    = var.amazon_side_asn

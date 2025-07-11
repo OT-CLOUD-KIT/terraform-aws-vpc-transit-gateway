@@ -47,7 +47,7 @@ random_alphanumeric_len = 4
 bu       = "ot"
 app      = "bp"
 env      = "d"
-resource = "database"
+resource = "gateway"
 
 special = false
 upper   = false
